@@ -12,23 +12,27 @@
     <a v-for="(a,i) in menu" :key="i">{{a}}</a>
   </div>
 
-  <div v-for="(a,i) in products" :key="i">
-    <img src='./assets/room0.jpg' class="room-img">
-    <h4 @click="modal=true">{{products[i]}}</h4>
-    <p>{{price[i]}}만원</p>
-    <button @click="increase(i)">허위매물신고</button> <span>신고수 : {{신고수[i]}}</span>
+
+  <div v-for="(a,i) in rooms" :key="i">
+    <img :src="rooms[i].image" class="room-img">
+    <h4 @click="modal=true">{{rooms[i].title}}</h4>
+    <p>{{rooms[i].price}}</p>
+    
   </div>
-  
+
 
 
 </template>
 
 <script>
  
+import data from './data.js';
+
 export default {
   name: 'App',
   data(){
     return{
+      rooms:data,
       modal:false,
       menu:['Home','Products','About'],
       price: [10,20,30],
