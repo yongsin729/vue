@@ -2,36 +2,42 @@
 
   <div class="black-bg" v-if="modal==true">
   <div class="white-bg">
-      <h4>상세페이지</h4>
-      <p>상세페이지의 내용</p>
-      <button @click="modal=false" class="modal-btn">닫기</button>
+      <h3>{{rooms[now].title}}</h3>
+      <img :src="rooms[now].image" class="bg-img">
+      <h4>{{rooms[now].content}}</h4>
+      <p>가격 : {{rooms[now].price}}</p>
+      <button @click="modal=false;" class="modal-btn">닫기</button>
   </div>
   </div>
+
 
   <div class="menu">
     <a v-for="(a,i) in menu" :key="i">{{a}}</a>
   </div>
 
+<Discount/>
+
 
   <div v-for="(a,i) in rooms" :key="i">
     <img :src="rooms[i].image" class="room-img">
-    <h4 @click="modal=true">{{rooms[i].title}}</h4>
+    <h4 @click="modal=true;now=i">{{rooms[i].title}}</h4>
     <p>{{rooms[i].price}}</p>
     
   </div>
-
-
-
+ 
 </template>
 
 <script>
  
 import data from './data.js';
+import Discount from './Discount.vue';
+// import Modal from './Modal.vue';
 
 export default {
   name: 'App',
   data(){
     return{
+      now:0,
       rooms:data,
       modal:false,
       menu:['Home','Products','About'],
@@ -55,8 +61,10 @@ export default {
 
   },//함수만드는 공간
   components: {
+    Discount:Discount,
     
-  }
+    // Modal:Modal,
+  }//Components 저장;
 }
 
 
@@ -70,6 +78,15 @@ body{
 }
 div{
   box-sizing: border-box;
+}
+.discount{
+  background: #eee;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+}
+.bg-img{
+  width: 50%;
 }
 .black-bg{
   width:100%;height:100%;
